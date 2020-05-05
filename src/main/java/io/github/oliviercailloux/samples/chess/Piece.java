@@ -147,7 +147,7 @@ public class Piece {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(identifyingLetter, color);
+		return Objects.hash(color, identifyingLetter);
 	}
 
 	@Override

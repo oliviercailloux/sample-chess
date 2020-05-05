@@ -31,30 +31,59 @@ public class Piece {
 		return Comparator.comparing(Piece::getColor).thenComparing(Piece::getIdentifyingLetter);
 	}
 
+	/**
+	 * @param color             one of "W" or "B"
+	 * @param identifyingLetter one of "P", "R", "B", "N", "Q", "K"
+	 * @return the corresponding piece
+	 */
 	public static Piece given(String color, String identifyingLetter) {
 		return new Piece(color, identifyingLetter);
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece pawn(String color) {
 		return new Piece(color, "P");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece rook(String color) {
 		return new Piece(color, "R");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece bishop(String color) {
 		return new Piece(color, "B");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece knight(String color) {
 		return new Piece(color, "N");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece queen(String color) {
 		return new Piece(color, "Q");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece king(String color) {
 		return new Piece(color, "K");
 	}

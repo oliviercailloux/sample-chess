@@ -3,6 +3,7 @@ package io.github.oliviercailloux.samples.chess;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import com.google.common.base.MoreObjects;
@@ -26,30 +27,63 @@ public class Piece {
 	private final String color;
 	private final String identifyingLetter;
 
+	public static Comparator<Piece> getComparator() {
+		return Comparator.comparing(Piece::getColor).thenComparing(Piece::getIdentifyingLetter);
+	}
+
+	/**
+	 * @param color             one of "W" or "B"
+	 * @param identifyingLetter one of "P", "R", "B", "N", "Q", "K"
+	 * @return the corresponding piece
+	 */
 	public static Piece given(String color, String identifyingLetter) {
 		return new Piece(color, identifyingLetter);
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece pawn(String color) {
 		return new Piece(color, "P");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece rook(String color) {
 		return new Piece(color, "R");
 	}
 
-	public static Piece bishop(String color) {
-		return new Piece(color, "B");
-	}
-
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece knight(String color) {
 		return new Piece(color, "N");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
+	public static Piece bishop(String color) {
+		return new Piece(color, "B");
+	}
+
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece queen(String color) {
 		return new Piece(color, "Q");
 	}
 
+	/**
+	 * @param color one of "W" or "B"
+	 * @return the corresponding piece
+	 */
 	public static Piece king(String color) {
 		return new Piece(color, "K");
 	}
@@ -62,8 +96,8 @@ public class Piece {
 		switch (identifyingLetter) {
 		case "P":
 		case "R":
-		case "B":
 		case "N":
+		case "B":
 		case "Q":
 		case "K":
 			break;
@@ -100,7 +134,7 @@ public class Piece {
 
 	/**
 	 * Returns <code>true</code> iff the given object is also a {@link Piece} and
-	 * has the same identifying letter and color as this one.
+	 * has the same color and identifying letter as this one.
 	 */
 	@Override
 	public boolean equals(Object o2) {
@@ -108,7 +142,7 @@ public class Piece {
 			return false;
 		}
 		final Piece p2 = (Piece) o2;
-		return identifyingLetter.equals(p2.identifyingLetter) && color.equals(p2.color);
+		return color.equals(p2.color) && identifyingLetter.equals(p2.identifyingLetter);
 	}
 
 	@Override

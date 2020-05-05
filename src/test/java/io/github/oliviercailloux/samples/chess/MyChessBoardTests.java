@@ -2,6 +2,8 @@ package io.github.oliviercailloux.samples.chess;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.ImmutableList;
@@ -29,26 +31,24 @@ class MyChessBoardTests {
 		final ImmutableMap<String, Piece> expected = ImmutableMap.<String, Piece>builder().put("a1", Piece.rook("W"))
 				.put("e1", Piece.king("W")).put("h1", Piece.rook("W")).put("a8", Piece.rook("B"))
 				.put("b8", Piece.knight("B")).put("e8", Piece.king("B")).build();
-		assertEquals(expected, board.getStringPiecesByPosition());
+		assertEquals(expected, board.getPiecesByPosition());
 	}
 
 	@Test
 	void testGetPieceByPosition() throws Exception {
 		final MyChessBoard board = MyChessBoard.newInstance();
-		assertEquals(Piece.king("W"), board.getPieceByPosition("e1"));
-		assertEquals(Piece.king("B"), board.getPieceByPosition("e8"));
+		assertEquals(Optional.of(Piece.king("W")), board.getPieceByPosition("e1"));
+		assertEquals(Optional.empty(), board.getPieceByPosition("e2"));
+		assertEquals(Optional.of(Piece.king("B")), board.getPieceByPosition("e8"));
 
 		board.setBoardByString(getBoardRNK());
-		final ImmutableMap<String, Piece> expected = ImmutableMap.<String, Piece>builder().put("a1", Piece.rook("W"))
-				.put("e1", Piece.king("W")).put("h1", Piece.rook("W")).put("a8", Piece.rook("B"))
-				.put("b8", Piece.knight("B")).put("e8", Piece.king("B")).build();
-		assertEquals(Piece.rook("W"), board.getPieceByPosition("a1"));
-		assertEquals(Piece.king("W"), board.getPieceByPosition("e1"));
-		assertEquals(Piece.rook("W"), board.getPieceByPosition("h1"));
-		assertEquals(Piece.rook("B"), board.getPieceByPosition("a8"));
-		assertEquals(Piece.knight("B"), board.getPieceByPosition("b8"));
-		assertEquals(Piece.king("B"), board.getPieceByPosition("e8"));
-		assertEquals(expected, board.getStringPiecesByPosition());
+		assertEquals(Optional.of(Piece.rook("W")), board.getPieceByPosition("a1"));
+		assertEquals(Optional.empty(), board.getPieceByPosition("a2"));
+		assertEquals(Optional.of(Piece.king("W")), board.getPieceByPosition("e1"));
+		assertEquals(Optional.of(Piece.rook("W")), board.getPieceByPosition("h1"));
+		assertEquals(Optional.of(Piece.rook("B")), board.getPieceByPosition("a8"));
+		assertEquals(Optional.of(Piece.knight("B")), board.getPieceByPosition("b8"));
+		assertEquals(Optional.of(Piece.king("B")), board.getPieceByPosition("e8"));
 	}
 
 	@Test
@@ -70,7 +70,8 @@ class MyChessBoardTests {
 
 		board.setBoardByString(getBoardRNK());
 		assertEquals(ImmutableList.of(Piece.king("W"), Piece.rook("W"), Piece.rook("W")), board.getOrderedPieces("W"));
-		assertEquals(ImmutableSet.of(Piece.rook("B"), Piece.knight("B"), Piece.king("B")), board.getOrderedPieces("B"));
+		assertEquals(ImmutableList.of(Piece.king("B"), Piece.knight("B"), Piece.rook("B")),
+				board.getOrderedPieces("B"));
 	}
 
 	/**

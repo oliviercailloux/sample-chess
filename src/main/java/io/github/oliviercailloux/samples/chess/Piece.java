@@ -60,16 +60,16 @@ public class Piece {
 	 * @param color one of "W" or "B"
 	 * @return the corresponding piece
 	 */
-	public static Piece bishop(String color) {
-		return new Piece(color, "B");
+	public static Piece knight(String color) {
+		return new Piece(color, "N");
 	}
 
 	/**
 	 * @param color one of "W" or "B"
 	 * @return the corresponding piece
 	 */
-	public static Piece knight(String color) {
-		return new Piece(color, "N");
+	public static Piece bishop(String color) {
+		return new Piece(color, "B");
 	}
 
 	/**
@@ -96,8 +96,8 @@ public class Piece {
 		switch (identifyingLetter) {
 		case "P":
 		case "R":
-		case "B":
 		case "N":
+		case "B":
 		case "Q":
 		case "K":
 			break;

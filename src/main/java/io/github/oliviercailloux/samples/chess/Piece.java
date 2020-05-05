@@ -3,6 +3,7 @@ package io.github.oliviercailloux.samples.chess;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import com.google.common.base.MoreObjects;
@@ -25,6 +26,10 @@ import com.google.common.base.MoreObjects;
 public class Piece {
 	private final String color;
 	private final String identifyingLetter;
+
+	public static Comparator<Piece> getComparator() {
+		return Comparator.comparing(Piece::getColor).thenComparing(Piece::getIdentifyingLetter);
+	}
 
 	public static Piece given(String color, String identifyingLetter) {
 		return new Piece(color, identifyingLetter);
@@ -100,7 +105,7 @@ public class Piece {
 
 	/**
 	 * Returns <code>true</code> iff the given object is also a {@link Piece} and
-	 * has the same identifying letter and color as this one.
+	 * has the same identifying color and letter as this one.
 	 */
 	@Override
 	public boolean equals(Object o2) {
@@ -108,12 +113,12 @@ public class Piece {
 			return false;
 		}
 		final Piece p2 = (Piece) o2;
-		return identifyingLetter.equals(p2.identifyingLetter) && color.equals(p2.color);
+		return color.equals(p2.color) && identifyingLetter.equals(p2.identifyingLetter);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(identifyingLetter, color);
+		return Objects.hash(color, identifyingLetter);
 	}
 
 	@Override

@@ -17,9 +17,9 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 public class MyChessBoard implements ChessBoard {
+	public static final ImmutableList<String> COLUMNS = ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h");
 
 	private Map<String, Piece> board;
-	private static final ImmutableList<String> COLUMNS = ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h");
 
 	/**
 	 * <p>

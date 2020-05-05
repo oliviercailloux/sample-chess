@@ -134,7 +134,7 @@ public class Piece {
 
 	/**
 	 * Returns <code>true</code> iff the given object is also a {@link Piece} and
-	 * has the same identifying color and letter as this one.
+	 * has the same color and identifying letter as this one.
 	 */
 	@Override
 	public boolean equals(Object o2) {

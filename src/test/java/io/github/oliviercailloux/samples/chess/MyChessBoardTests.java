@@ -29,7 +29,7 @@ class MyChessBoardTests {
 		final ImmutableMap<String, Piece> expected = ImmutableMap.<String, Piece>builder().put("a1", Piece.rook("W"))
 				.put("e1", Piece.king("W")).put("h1", Piece.rook("W")).put("a8", Piece.rook("B"))
 				.put("b8", Piece.knight("B")).put("e8", Piece.king("B")).build();
-		assertEquals(expected, board.getStringPiecesByPosition());
+		assertEquals(expected, board.getPiecesByPosition());
 	}
 
 	@Test

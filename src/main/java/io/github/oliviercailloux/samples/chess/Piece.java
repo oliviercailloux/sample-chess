@@ -17,6 +17,9 @@ import com.google.common.base.MoreObjects;
  * <p>
  * (A better design would use {@link Enum}s.)
  * </p>
+ * <p>
+ * This class must not be modified.
+ * </p>
  *
  */
 public class Piece {
@@ -55,7 +58,8 @@ public class Piece {
 		this.color = checkNotNull(color);
 		checkArgument(color.equals("W") || color.equals("B"));
 
-		switch (checkNotNull(identifyingLetter)) {
+		this.identifyingLetter = checkNotNull(identifyingLetter);
+		switch (identifyingLetter) {
 		case "P":
 		case "R":
 		case "B":
@@ -66,7 +70,6 @@ public class Piece {
 		default:
 			throw new IllegalArgumentException();
 		}
-		this.identifyingLetter = identifyingLetter;
 	}
 
 	/**

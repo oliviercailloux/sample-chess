@@ -119,6 +119,20 @@ public class MyChessBoard implements ChessBoard {
 
 	@Override
 	public Optional<Piece> getPieceByPosition(String position) {
+		checkNotNull(position);
+		checkArgument(position.length() == 2);
+		final String column = position.substring(0, 1);
+		final String row = position.substring(1, 2);
+		checkArgument(COLUMNS.contains(column));
+		final int rowNb;
+		try {
+			rowNb = Integer.parseInt(row);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(e);
+		}
+		checkArgument(1 <= rowNb);
+		checkArgument(rowNb <= 8);
+
 		return Optional.ofNullable(board.get(position));
 	}
 
